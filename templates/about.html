@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>About</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="{{ url_for("index") }}">League Stats</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("about") }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("masteryanalysis") }}">MasteryAnalysis</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("clashscale") }}">ClashScale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("championscale") }}">ChampionScale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for("presets") }}">Presets</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page faq-page">
+        <section class="clean-block clean-faq dark">
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">About</h2>
+                    <p>Hi everyone! My name is Herry Jia and I created this project as three little python scripts in the Summer of 2021. Now it is ported to the web and (hopefully) more useable for everyone. You can check out the code for this and my other projects <a href="https://github.com/CowTrainer">here</a>!</p>
+                </div>
+                <h2 class="text-center text-info" style="padding-bottom: 11px;">FAQ</h2>
+                <div class="block-content">
+                    <div class="faq-item">
+                        <h4 class="question">Why do we I have to use my own API Key? Isn't that dangerous?</h4>
+                        <div class="answer">
+                            <p>Yes, I know it's slightly unconventional, and usually not good to share your API Key with others, however, I do not store or steal your API Key in any way (and if you are suspicious that I will you can use the local version found on my GitHub or run this web version on your own machine) and also I do not have a production key, so the least rate limiting way for everyone is to use your own key. I will attempt to get a production key in the future.</p>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <h4 class="question" id = "howAPI">How do I get an API key?</h4>
+                        <div class="answer">
+                            <p>Go to&nbsp;<a href="https://developer.riotgames.com/">https://developer.riotgames.com/</a>&nbsp;and log in / register for an account, go to your dashboard and at the bottom there should be an option to generate an API key.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item"></div>
+                </div>
+                <h2 class="text-info"></h2>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer dark">
+        <div class="footer-copyright">
+            <p>© 2022 Copyright Herry Jia</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>
