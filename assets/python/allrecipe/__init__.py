@@ -32,6 +32,29 @@ class Scraper:
         if resp == '0':
             print(f'No recipes found for {name}')
             return
+        
+        ret=[]
+        articles = self.soup.find_all("div", class_= "card__recipe")
+        # info = self.soup.find_all('div', class_="card__detailsContainer")
+        cnt=0
+        for article in articles:
+            data={}
+            
+            name=article.find("a", title=re.compile(''))['title']
+            data['name']=name
+
+            img=article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")["src"]
+            data['image']=img
+
+            data["url"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
+
+            if data and 'image' in data:
+                ret.append(data)
+            if cnt>=4:
+                break
+        
+        print(ret)
+        
 
         # Collect all the search results in a BS4 element tag
         articles = self.soup.find_all('div', class_="card__detailsContainer")
@@ -46,7 +69,7 @@ class Scraper:
                     break
         self.links = [txt.a['href'] for txt in texts]
         self.names = [txt.h3.text for txt in texts]
-        self.get_data()
+        # self.get_data()
 
     def get_data(self):
         self.ingredientsList = []
