@@ -6,7 +6,7 @@ import numpy as np
 model = load_model('Vision-Nutrition/assets/python/keras_model.h5')
 
 # edit this to fit the model
-ind=['cucumber','potato','onion','tomato']
+ind=['cucumber','potato','onion','tomato','lettuce','cabbage','carrot','mushroom','peas','beans','beef','chicken','spinach','cheese']
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
