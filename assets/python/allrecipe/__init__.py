@@ -35,70 +35,31 @@ class Scraper:
         
         ret=[]
         articles = self.soup.find_all("div", class_= "card__recipe")
-        # info = self.soup.find_all('div', class_="card__detailsContainer")
-        cnt=0
-        for article in articles:
+        info = self.soup.find_all('div', class_="card__detailsContainer")
+        for i in range(max(len(articles), 4)):
             data={}
             
-            name=article.find("a", title=re.compile(''))['title']
+            name=articles[i].find("a", title=re.compile(''))['title']
             data['name']=name
 
-            img=article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")["src"]
+            img=articles[i].find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")["src"]
             data['image']=img
 
-            data["url"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
+            url = articles[i].find("a", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
+            data["url"]=url
+
+            #detailed info
+            self.get_url(data["url"])
+
+            ingredient_spans = self.soup.find_all('span', class_='ingredients-item-name')
+            ingredients = [span.text.strip() for span in ingredient_spans]
+            data['ingredients']=ingredients
 
             if data and 'image' in data:
                 ret.append(data)
-            if cnt>=4:
-                break
         
         print(ret)
-        
-
-        # Collect all the search results in a BS4 element tag
-        articles = self.soup.find_all('div', class_="card__detailsContainer")
-
-        texts = []
-        for article in articles:
-            txt = article.find('div', class_='card__detailsContainer-left')
-            if txt:
-                if len(texts) < 4:
-                    texts.append(txt)
-                else:
-                    break
-        self.links = [txt.a['href'] for txt in texts]
-        self.names = [txt.h3.text for txt in texts]
-        # self.get_data()
-
-    def get_data(self):
-        self.ingredientsList = []
-        self.instructionsList = []
-        for i, link in enumerate(self.links):
-            self.get_url(link)
-            print('-' * 4 + self.names[i] + '-' * 4)
-            info_names = [div.text.strip() for div in self.soup.find_all(
-                'div', class_='recipe-meta-item-header')]
-            ingredient_spans = self.soup.find_all(
-                'span', class_='ingredients-item-name')
-            instructions_spans = self.soup.find_all('div', class_='paragraph')
-            ingredients = [span.text.strip() for span in ingredient_spans]
-            instructions = [span.text.strip() for span in instructions_spans]
-            for i, div in enumerate(self.soup.find_all('div',
-                                                       class_='recipe-meta-item-body')):
-                print(info_names[i].capitalize(), div.text.strip())
-            print()
-            print('Ingredients'.center(len(ingredients[0]), ' '))
-            print('\n'.join(ingredients))
-            print()
-            print('Instructions'.center(len(instructions[0]), ' '))
-            # print((count, instruction) for count,
-            #       instruction in zip(range(len(instructions)), instructions))
-            print('\n'.join(instructions))
-            print()
-            print('*' * 50)
-            self.ingredientsList.append(ingredients)
-            self.instructionsList.append(instructions)
+        return ret
 
 
 def allrecipes(recipeName, ingIncl, ingExcl):
