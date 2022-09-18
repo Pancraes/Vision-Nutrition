@@ -40,7 +40,7 @@ class Scraper:
         for article in articles:
             txt = article.find('div', class_='card__detailsContainer-left')
             if txt:
-                if len(texts) < 5:
+                if len(texts) < 4:
                     texts.append(txt)
                 else:
                     break
@@ -78,10 +78,7 @@ class Scraper:
             self.instructionsList.append(instructions)
 
 
-def main():
-    recipeName = "Chicken Stew"
-    ingIncl = ""
-    ingExcl = ""
+def allrecipes(recipeName, ingIncl, ingExcl):
     query_dict = {
         "search": recipeName,     # Query keywords
         # 'Must be included' ingrdients (optional)
@@ -96,5 +93,4 @@ def main():
     scrap.print_info()
 
 
-if __name__ == '__main__':
-    main()
+allrecipes('',['tomato', 'potato', 'onion', 'cucumber'],['chicken', 'beef', 'lamb'])
