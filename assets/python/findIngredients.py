@@ -6,13 +6,13 @@ import numpy as np
 model = load_model('Vision-Nutrition/assets/python/keras_model.h5')
 
 # edit this to fit the model
-ind=['beef','bread','corn','onion','bell pepper','tomato']
+ind=['cucumber','potato','onion','tomato']
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
 # determined by the first position in the shape tuple, in this case 1.
 # Replace this with the path to your image
-im = Image.open('Vision-Nutrition/test/onion.jpg')
+im = Image.open('Vision-Nutrition/test/cucumber.jpg')
 #resize the image to a 224x224 with the same strategy as in TM2:
 #resizing the image to be at least 224x224 and then cropping from the center
 width, height = im.size
@@ -21,7 +21,7 @@ ingredients=set()
 
 resultImage=im
 
-for i in range(1, 3):
+for i in range(1, 4):
     subSize=i
 
     for xi in range(0, subSize*2):
@@ -46,7 +46,7 @@ for i in range(1, 3):
             prediction = model.predict(data)
             for i in range(len(prediction[0])):
                 cur = prediction[0][i]
-                if (cur>=0.15):
+                if (cur>=0.95):
                     if (ind[i] not in ingredients):
                         draw = ImageDraw.Draw(resultImage)
                         draw.ellipse((x, y, x+width//subSize, y+height//subSize), outline="red",
